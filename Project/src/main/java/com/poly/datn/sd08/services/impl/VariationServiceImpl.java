@@ -19,5 +19,20 @@ public class VariationServiceImpl implements VariationService {
         return variationRepository.findAll();
     }
 
+    @Override
+    public TVariation findById(Long id) {
+        return variationRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(TVariation variation) {
+        variationRepository.save(variation);
+    }
+
+    @Override
+    public void delete(Long id) {
+        variationRepository.deleteById(id);
+    }
+
 
 }

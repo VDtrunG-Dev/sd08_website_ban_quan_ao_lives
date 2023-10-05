@@ -8,5 +8,11 @@ public interface VariationService {
 
     List<TVariation> getALl();
 
+    TVariation findById(Long id);
+
+    void save(TVariation variation);
+
+    void delete(Long id);
+
 
 }
