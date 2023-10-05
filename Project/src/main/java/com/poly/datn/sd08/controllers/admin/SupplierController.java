@@ -20,7 +20,7 @@ public class SupplierController {
     @Autowired
     private SupplierService supplierService;
 
-    @GetMapping("hien-thi")
+    @GetMapping("view")
     public String hienThi(Model model) {
         List<TSupplier> listS = supplierService.getAll();
         model.addAttribute("listS", listS);
@@ -30,7 +30,7 @@ public class SupplierController {
     @PostMapping("add")
     public String add(TSupplier supplier) {
         supplierService.save(supplier);
-        return "redirect:/supplier/hien-thi";
+        return "redirect:/supplier/view";
     }
 
     @GetMapping("view-update/{id}")
@@ -43,14 +43,14 @@ public class SupplierController {
     @PostMapping("update")
     public String capNhat(TSupplier supplier) {
         supplierService.save(supplier);
-        return "redirect:/supplier/hien-thi";
+        return "redirect:/supplier/view";
     }
 
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable Long id) {
         supplierService.delete(id);
-        return "redirect:/supplier/hien-thi";
+        return "redirect:/supplier/view";
     }
 
 }

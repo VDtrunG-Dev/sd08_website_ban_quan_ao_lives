@@ -19,7 +19,7 @@ public class VariationController {
     @Autowired
     private VariationService variationService;
 
-    @GetMapping("hien-thi")
+    @GetMapping("view")
     public String hienThi(Model model) {
         List<TVariation> list = variationService.getALl();
         model.addAttribute("list", list);
@@ -29,7 +29,7 @@ public class VariationController {
     @PostMapping("add")
     public String add(TVariation variation) {
         variationService.save(variation);
-        return "redirect:/variation/hien-thi";
+        return "redirect:/variation/view";
     }
 
 
@@ -43,7 +43,7 @@ public class VariationController {
     @PostMapping("update")
     public String update(TVariation variation) {
         variationService.save(variation);
-        return "redirect:/variation/hien-thi";
+        return "redirect:/variation/view";
     }
 
 
