@@ -20,7 +20,9 @@ public class BrandController {
     @GetMapping("/view")
     public String view(Model model){
         List<TBrand> brands = brandService.findAll();
-        model.addAttribute("brands", brands);
+        for(TBrand b : brands){
+            System.out.println(b.getName());
+        }
         return "admin/index";
     }
 
