@@ -50,7 +50,7 @@ public class VariationController {
     @GetMapping("delete/{id}")
     public String delete(@PathVariable Long id) {
         variationService.delete(id);
-        return "redirect:/variation/hien-thi";
+        return "redirect:/variation/view";
     }
 
 
