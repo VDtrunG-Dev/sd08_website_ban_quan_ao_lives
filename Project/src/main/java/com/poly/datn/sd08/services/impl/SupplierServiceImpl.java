@@ -18,4 +18,8 @@ public class SupplierServiceImpl implements SupplierService {
     public List<TSupplier> getAll() {
         return supplierRepository.findAll();
     }
+
+
+
+
 }
