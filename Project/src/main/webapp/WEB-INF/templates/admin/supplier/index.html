@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Demo</title>
+</head>
+<body>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Address_id</th>
+        <th>Supplier_code</th>
+        <th>Name</th>
+        <th>Phone_number</th>
+        <th>Email</th>
+        <th>Description</th>
+        <th>Created_by</th>
+        <th>Created_at</th>
+        <th>Updated_at</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="s,index: ${listS}">
+        <td th:text="${s.id}"></td>
+        <td th:text="${s.name}"></td>
+        <td th:text="${s.addressId}"></td>
+        <td th:text="${s.supplierCode}"></td>
+        <td th:text="${s.phoneNumber}"></td>
+        <td th:text="${s.email}"></td>
+        <td th:text="${s.description}"></td>
+        <td th:text="${s.createdBy}"></td>
+        <td th:text="${s.createdAt}"></td>
+        <td th:text="${s.updatedAt}"></td>
+        <td th:text="${s.status}"></td>
+        <td>
+            <a th:href="@{delete/{id}(id=${s.id})}" class="delete">
+                Delete
+            </a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+</body>
+</html>

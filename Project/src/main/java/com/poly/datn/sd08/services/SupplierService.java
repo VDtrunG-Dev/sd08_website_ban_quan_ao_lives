@@ -7,4 +7,6 @@ import java.util.List;
 public interface SupplierService {
 
     List<TSupplier> getAll();
+
+
 }
