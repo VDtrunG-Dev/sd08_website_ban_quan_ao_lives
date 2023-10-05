@@ -8,5 +8,9 @@ public interface SupplierService {
 
     List<TSupplier> getAll();
 
+    TSupplier findById(Long id);
 
+    void save(TSupplier supplier);
+
+    void delete(Long id);
 }
