@@ -18,4 +18,6 @@ public class VariationServiceImpl implements VariationService {
     public List<TVariation> getALl() {
         return variationRepository.findAll();
     }
+
+
 }

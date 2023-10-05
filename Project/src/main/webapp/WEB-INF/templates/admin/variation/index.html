@@ -25,6 +25,12 @@
         <td th:text="${v.createdAt}"></td>
         <td th:text="${v.updatedAt}"></td>
         <td th:text="${v.status}"></td>
+        <td class="align-middle">
+
+            <a th:href="@{delete/{id}(id=${v.id})}" class="delete">
+               Delete
+            </a>
+        </td>
 
     </tr>
     </tbody>
