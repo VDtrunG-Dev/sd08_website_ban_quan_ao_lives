@@ -1,47 +1,41 @@
 <!DOCTYPE html>
-
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        lang="en"
-        class="light-style layout-navbar-fixed layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
-        data-assets-path="../../assets/"
-        data-template="vertical-menu-template-no-customizer"
->
-<head th:replace="~{/admin/fragments/head :: head}"></head>
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Demo</title>
+</head>
 <body>
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
-            <!-- Menu -->
-            <div th:replace="~{admin/fragments/menu :: menu}"></div>
-            <!-- / Menu -->
 
-            <!-- Layout container -->
-            <div class="layout-page">
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>CreateBy</th>
+        <th>CreateAt</th>
+        <th>UpdateAt</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="v,index: ${list}">
+        <td th:text="${v.id}"></td>
+        <td th:text="${v.name}"></td>
+        <td th:text="${v.createdBy}"></td>
+        <td th:text="${v.createdAt}"></td>
+        <td th:text="${v.updatedAt}"></td>
+        <td th:text="${v.status}"></td>
+        <td class="align-middle">
 
-            <!-- Navbar -->
-            <div th:replace="~{admin/fragments/navbar :: navbar}"></div>
-            <!-- / Navbar -->
+            <a href="/variation/delete/${v.id}" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Delete</a>
+        </td>
 
-            <!-- Content wrapper -->
-            <div th:replace="~{admin/fragments/content :: content}"></div>
-            <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-        </div>
+    </tr>
+    </tbody>
+</table>
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
 
-        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-        <div class="drag-target"></div>
-    </div>
-    <!-- / Layout wrapper -->
 
-    <!-- Link Java script -->
-    <div th:replace="~{/admin/fragments/js :: link_js}"></div>
+
 </body>
 </html>

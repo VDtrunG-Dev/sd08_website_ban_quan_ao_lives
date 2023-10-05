@@ -19,7 +19,20 @@ public class SupplierServiceImpl implements SupplierService {
         return supplierRepository.findAll();
     }
 
+    @Override
+    public TSupplier findById(Long id) {
+        return supplierRepository.findById(id).orElse(null);
+    }
 
+    @Override
+    public void save(TSupplier supplier) {
+        supplierRepository.save(supplier);
+    }
+
+    @Override
+    public void delete(Long id) {
+        supplierRepository.deleteById(id);
+    }
 
 
 }
