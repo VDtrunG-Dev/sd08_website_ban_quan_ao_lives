@@ -23,7 +23,7 @@ public class UserServicesImpl {
         return userRepository.findAll();
     }
 
-    public TUser findByEmailAndSdt(TUser user){
+    public TUser checkUser(TUser user){
 
         if(user != null && user.getPassword().equals(user.getPassword()) && user.getEmail().equals(user.getEmail())){
             return user;
@@ -31,11 +31,21 @@ public class UserServicesImpl {
         return null;
     }
 
+    public TUser findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+    public boolean checkPassword(String newPassword, String confirmPassword){
+        if (newPassword.equals(confirmPassword)){
+            return true;
+        }else {
+            return false;
+        }
+    }
     public boolean addUser(TUser user){
         try {
-
-            TRole role = roleRepository.findByRoleCode("user");
-            user.setRole(role);
+//            TRole role = roleRepository.findByRoleCode("user");
+//            user.setRole(role);
             user.setStatus(1);
             userRepository.save(user);
             return true;

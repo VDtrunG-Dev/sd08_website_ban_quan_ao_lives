@@ -1,8 +1,8 @@
 package com.poly.datn.sd08.controllers.admin;
 
 import com.poly.datn.sd08.model.entities.TUser;
-import com.poly.datn.sd08.repositories.IUserRepository;
 import com.poly.datn.sd08.services.impl.UserServicesImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.Date;
 
 @Controller
 public class LoginController {
@@ -25,11 +23,6 @@ public class LoginController {
     @Autowired
     private UserServicesImpl userServices;
 
-    @Autowired
-    private IUserRepository userRepository;
-
-
-
     @GetMapping("/login")
     private String pageLogin(Model model){
         model.addAttribute("isDisplayLogin", true);
@@ -39,14 +32,14 @@ public class LoginController {
 
     @PostMapping("/signin")
     private String loginPost(Model model, @ModelAttribute("account") TUser userInput, HttpSession session){
-        TUser user = userRepository.findByEmail(userInput.getEmail());
+        TUser user = userServices.findByEmail(userInput.getEmail());
         if(user != null ){
-            TUser userFind = userServices.findByEmailAndSdt(user);
+            TUser userFind = userServices.checkUser(user);
             System.out.println(user.getRole().getRoleCode());
             System.out.println(userFind.getStatus());
             if(userFind.getStatus() == 1 && userFind.getRole().getRoleCode().equals("user")){
                 session.setAttribute("account",user);
-                return "redirect:/login/forgotpassword";
+                return "redirect:/forgotpassword";
             }else {
                 session.setAttribute("account",user);
                 return "redirect:/admin/brand/view";
@@ -84,14 +77,58 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/send-email")
-    private String sendEmail(@RequestParam("toEmail") String email){
-        String to = email;
-        System.out.println(email);
-        String subject = "Đổi Mật Khẩu Tài Khoản";
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        return "login";
+    @PostMapping("/forgotpassword/send-email")
+    private String sendEmail(@RequestParam("email") String email,Model model,HttpServletRequest request){
+        TUser user = userServices.findByEmail(email);
+        if(user == null) {
+            model.addAttribute("messager", "Email Không Tồn Tại");
+            return "forward:/forgot-password";
+        }else {
+            String resetLink = UriComponentsBuilder.fromHttpUrl(getBaseUrl(request))
+                    .path("/newpassword")
+                    .queryParam("email", email)
+                    .encode() // Mã hóa giá trị tham số
+                    .toUriString();
+
+            String to = email;
+            String subject = "Đổi Mật Khẩu Tài Khoản";
+            String body = "Nhấn Vào Để Đổi Mật Khẩu : " +	 resetLink;
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(body);
+            emailSender.send(message);
+        }
+
+        return "redirect:https://mail.google.com/";
+    }
+
+    @GetMapping("/newpassword")
+    private String pageNewPassWord(@RequestParam("email") String email,Model model){
+        emails = email;
+        model.addAttribute("isDisplayNewPassWord", true);
+        return "forgotpassword";
+    }
+
+    @PostMapping("/newpassword/submit")
+    private String pageSubmitPassWord(Model model,@RequestParam("passwordNew") String passwordNew, @RequestParam("confirmPassword") String confirmPassword){
+        TUser user = userServices.findByEmail(emails);
+        try {
+            user.setPassword(passwordNew);
+            userServices.addUser(user);
+        }catch (Exception e){
+
+        }
+        System.out.println(userServices.checkPassword(passwordNew,confirmPassword));
+        System.out.println(passwordNew);
+        System.out.println(confirmPassword);
+        return "redirect:/login";
+    }
+    private String getBaseUrl(HttpServletRequest request) {
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();
+        return scheme + "://" + serverName + ":" + serverPort + contextPath;
     }
 }

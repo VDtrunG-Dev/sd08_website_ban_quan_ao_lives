@@ -3,6 +3,7 @@ DROP DATABASE IF EXISTS db_datn_shop_ban_quan_ao_lives_v2;
 CREATE DATABASE db_datn_shop_ban_quan_ao_lives_v2;
 USE db_datn_shop_ban_quan_ao_lives_v2;
 
+
 -- Bảng category
 CREATE TABLE `t_category` (
   `id` BIGINT AUTO_INCREMENT NOT NULL,
@@ -176,6 +177,11 @@ CREATE TABLE `t_user` (
   `status` INT DEFAULT 1,
   PRIMARY KEY (`id`)
 );
+
+INSERT INTO t_user(role_id,first_name,last_name,email,password) values
+('1','Dinh','Hoang','hoang@gmail.com','123')
+select * from t_user
+
 
 -- Bảng user_address
 CREATE TABLE `r_user_address` (
@@ -461,5 +467,5 @@ INSERT INTO r_promotion_product_item (product_item_id, promotion_id)
 VALUES
   (1, 1),
   (2, 2);
-
+select * from t_brand
 
