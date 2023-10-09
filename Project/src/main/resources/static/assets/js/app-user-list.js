@@ -39,16 +39,33 @@ $(function () {
   // Users datatable
   if (dt_user_table.length) {
     var dt_user = dt_user_table.DataTable({
-      ajax: assetsPath + 'json/user-list.json', // JSON file to add data
+      ajax: {
+        type: 'GET',
+        url: '/employee/view', // Thay đổi địa chỉ yêu cầu để lấy danh sách người dùng
+        dataSrc: 'users' // Chúng ta không cần phần mở đầu trong JSON
+      },
       columns: [
-        // columns according to JSON
-        { data: '' },
-        { data: 'full_name' },
-        { data: 'role' },
-        { data: 'current_plan' },
-        { data: 'billing' },
+        { data: 'id' },
+        { data: 'firstName' },
+        { data: 'lastName' },
+        { data: 'cccd' },
+        { data: 'dateOfBirth' },
+        { data: 'email' },
+        { data: 'phoneNumber' },
         { data: 'status' },
-        { data: 'action' }
+        { data: null,
+          render: function (data, type, full, meta) {
+            return '<div class="d-flex align-items-center">' +
+                '<a href="javascript:;" class="text-body"><i class="ti ti-edit ti-sm me-2"></i></a>' +
+                '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
+                '<a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical ti-sm mx-1"></i></a>' +
+                '<div class="dropdown-menu dropdown-menu-end m-0">' +
+                '<a href="' + userView + '" class="dropdown-item">View</a>' +
+                '<a href="javascript:;" class="dropdown-item">Suspend</a>' +
+                '</div>' +
+                '</div>';
+          }
+        }
       ],
       columnDefs: [
         {

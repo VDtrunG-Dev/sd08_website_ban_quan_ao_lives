@@ -23,7 +23,7 @@ public class BrandController {
         for(TBrand b : brands){
             System.out.println(b.getName());
         }
-        return "admin/index";
+        return "/admin/index";
     }
 
 }
