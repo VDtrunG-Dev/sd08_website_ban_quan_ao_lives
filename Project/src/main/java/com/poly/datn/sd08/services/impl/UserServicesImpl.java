@@ -25,8 +25,9 @@ public class UserServicesImpl {
 
     public TUser checkUser(TUser user){
 
-        if(user != null && user.getPassword().equals(user.getPassword()) && user.getEmail().equals(user.getEmail())){
-            return user;
+        TUser userRepo = userRepository.findByEmail(user.getEmail());
+        if(user != null && user.getPassword().equals(userRepo.getPassword()) && user.getEmail().equals(userRepo.getEmail())){
+            return userRepo;
         }
         return null;
     }

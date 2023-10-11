@@ -26,29 +26,25 @@ public class LoginController {
     @GetMapping("/login")
     private String pageLogin(Model model){
         model.addAttribute("isDisplayLogin", true);
-        model.addAttribute("isDisplayRegister", false);
         return "login";
     }
 
     @PostMapping("/signin")
     private String loginPost(Model model, @ModelAttribute("account") TUser userInput, HttpSession session){
-        TUser user = userServices.findByEmail(userInput.getEmail());
+        TUser user = userServices.checkUser(userInput);
         if(user != null ){
-            TUser userFind = userServices.checkUser(user);
-            System.out.println(user.getRole().getRoleCode());
-            System.out.println(userFind.getStatus());
-            if(userFind.getStatus() == 1 && userFind.getRole().getRoleCode().equals("user")){
+            if(user.getStatus() == 1 && user.getRole().getRoleCode().equals("user")){
                 session.setAttribute("account",user);
-                return "redirect:/forgotpassword";
+                return "redirect:/profile";
             }else {
                 session.setAttribute("account",user);
                 return "redirect:/admin/brand/view";
             }
-
         }else {
+            model.addAttribute("isDisplayLogin", true);
             model.addAttribute("error","Thông tin không tồn tại");
+            return "login";
         }
-        return "login";
     }
 
 
