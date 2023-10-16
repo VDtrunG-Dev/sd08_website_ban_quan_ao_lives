@@ -12,8 +12,8 @@ import java.sql.Date;
 @ToString
 @Builder
 @Entity
-@Table(name = "t_product")
-public class TProduct {
+@Table(name = "t_option")
+public class TOption {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,9 @@ public class TProduct {
     @Column(name = "created_by")
     private String createdBy;
 
+    @Column(name = "updated_by")
+    private String updatedBy;
+
     @Column(name = "created_at", insertable = false, updatable = false)
     private Date createdAt;
 
@@ -33,4 +36,5 @@ public class TProduct {
 
     @Column(name = "status")
     private Integer status;
+
 }

@@ -1,40 +1,30 @@
 package com.poly.datn.sd08.model.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Date;
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 @Builder
+@Entity
 @Table(name = "t_user")
 public class TUser {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
     private TRole role;
+
+    @ManyToOne
+    @JoinColumn(name = "rank_id")
+    private TRank rank;
 
     @Column(name = "user_code")
     private String userCode;
@@ -49,7 +39,10 @@ public class TUser {
     private String cccd;
 
     @Column(name = "date_of_birth")
-    private java.sql.Date dateOfBirth;
+    private Date dateOfBirth;
+
+    @Column(name = "sex")
+    private Integer sex;
 
     @Column(name = "email")
     private String email;
@@ -66,14 +59,20 @@ public class TUser {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "total_score")
+    private Long totalScore;
+
     @Column(name = "created_by")
     private String createdBy;
 
+    @Column(name = "updated_by")
+    private String updatedBy;
+
     @Column(name = "created_at", insertable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
     @Column(name = "updated_at", insertable = false)
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 
     @Column(name = "status")
     private Integer status;

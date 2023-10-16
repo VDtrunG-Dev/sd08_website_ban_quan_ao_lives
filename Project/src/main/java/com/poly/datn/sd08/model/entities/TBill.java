@@ -1,31 +1,18 @@
 package com.poly.datn.sd08.model.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Date;
 
-
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 @Builder
+@Entity
 @Table(name = "t_bill")
 public class TBill {
     @Id
@@ -35,20 +22,19 @@ public class TBill {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private TUser user;
+    private TUser customer;
 
     @ManyToOne
-    @JoinColumn(name = "address_id")
-    private TAddress address;
+    @JoinColumn(name = "voucher_id")
+    private TVoucher voucher;
 
-    @Column(name = "shipping_method_id")
-    private Long shippingMethodId;
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    private TUser staff;
 
-    @Column(name = "bill_status_id")
-    private Long billStatusId;
-
-    @Column(name = "staff_id")
-    private Long staffId;
+    @ManyToOne
+    @JoinColumn(name = "shipping_method_id")
+    private TShippingMethod shippingMethod;
 
     @Column(name = "bill_code")
     private String billCode;
@@ -65,16 +51,37 @@ public class TBill {
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
 
+    @Column(name = "discount")
+    private BigDecimal discount;
+
     @Column(name = "total_amount_after_discount")
     private BigDecimal totalAmountAfterDiscount;
+
+    @Column(name = "province")
+    private String province;
+
+    @Column(name = "district")
+    private String district;
+
+    @Column(name = "ward")
+    private String ward;
+
+    @Column(name = "detail_address")
+    private String detailAddress;
 
     @Column(name = "created_by")
     private String createdBy;
 
+    @Column(name = "updated_by")
+    private String updatedBy;
+
     @Column(name = "created_at", insertable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
     @Column(name = "updated_at", insertable = false)
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
+
+    @Column(name = "status")
+    private Integer status;
 
 }

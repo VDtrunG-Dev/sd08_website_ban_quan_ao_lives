@@ -12,16 +12,16 @@ import java.math.BigDecimal;
 @ToString
 @Builder
 @Entity
-@Table(name = "t_shopping_cart_detail")
-public class TShoppingCartDetail {
+@Table(name = "t_bill_detail")
+public class TBillDetail {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private TShoppingCart cart;
+    @JoinColumn(name = "bill_id")
+    private TBill bill;
 
     @ManyToOne
     @JoinColumn(name = "product_variation_id")
@@ -33,8 +33,17 @@ public class TShoppingCartDetail {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "total_price")
-    private BigDecimal totalPrice;
+    @Column(name = "discount")
+    private BigDecimal discount;
+
+    @Column(name = "tax")
+    private BigDecimal tax;
+
+    @Column(name = "unit_price")
+    private BigDecimal unitPrice;
+
+    @Column(name = "subtotal_price")
+    private BigDecimal subtotalPrice;
 
     @Column(name = "status")
     private Integer status;

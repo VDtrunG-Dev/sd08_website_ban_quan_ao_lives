@@ -1,28 +1,18 @@
 package com.poly.datn.sd08.model.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Date;
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 @Builder
+@Entity
 @Table(name = "t_shipping_method")
 public class TShippingMethod {
     @Id
@@ -36,14 +26,20 @@ public class TShippingMethod {
     @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "created_by")
     private String createdBy;
 
+    @Column(name = "updated_by")
+    private String updatedBy;
+
     @Column(name = "created_at", insertable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
     @Column(name = "updated_at", insertable = false)
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 
     @Column(name = "status")
     private Integer status;

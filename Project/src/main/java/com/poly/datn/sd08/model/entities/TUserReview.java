@@ -10,17 +10,28 @@ import lombok.*;
 @ToString
 @Builder
 @Entity
-@Table(name = "t_shopping_cart")
-public class TShoppingCart {
+@Table(name = "t_user_review")
+public class TUserReview {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "customer_id")
     private TUser customer;
+
+    @ManyToOne
+    @JoinColumn(name = "bill_detail_id")
+    private TBillDetail billDetail;
+
+    @Column(name = "rating_value")
+    private Integer ratingValue;
+
+    @Column(name = "comment")
+    private String comment;
 
     @Column(name = "status")
     private Integer status;
+
 }
