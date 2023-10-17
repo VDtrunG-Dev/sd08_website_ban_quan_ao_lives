@@ -30,10 +30,10 @@ public class VoucherController {
         XSSFWorkbook workbook = new XSSFWorkbook();
 
 
-        XSSFSheet sheet = workbook.createSheet("Danh sách hóa đơn");
+        XSSFSheet sheet = workbook.createSheet("Danh sách voucher");
         XSSFRow headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("Mã Hóa Đơn");
-        headerRow.createCell(1).setCellValue("Ngày Thanh Toán");
+        headerRow.createCell(0).setCellValue("Mã Voucher");
+        headerRow.createCell(1).setCellValue("Số Lượng");
         headerRow.createCell(2).setCellValue("Tổng Tiền Sau Khi Giảm");
         headerRow.createCell(3).setCellValue("Trạng Thái");
         headerRow.createCell(4).setCellValue("Người Nhận");
