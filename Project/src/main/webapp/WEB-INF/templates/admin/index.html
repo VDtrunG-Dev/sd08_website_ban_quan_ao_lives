@@ -9,12 +9,27 @@
         data-template="vertical-menu-template-no-customizer"
 >
 <head>
+    <style>
+        .active-page {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .pagination {
+            display: flex;
+            list-style: none;
+        }
+        .pagination li {
+            margin: 0 5px;
+        }
+    </style>
     <meta charset="utf-8" />
     <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
-
+    <style>.menu-link.active {
+        color: blue; /* Màu mới sau khi được nhấn */
+    }</style>
     <title>Dashboard - Analytics | Vuexy - Bootstrap Admin Template</title>
 
     <meta name="description" content="" />
@@ -136,6 +151,135 @@
         });
     });
 </script>
+
+<script>
+    // Kiểm tra số lượng dòng dữ liệu trong bảng
+    const table = document.getElementById("phanTrang");
+    const rows = table.querySelectorAll("tbody tr");
+    const itemsPerPage = 5;
+    let currentPage = 1;
+    let totalPages;
+
+    if (rows.length > itemsPerPage) {
+        createPagination(rows.length);
+    }
+
+    // Hàm để tạo nút phân trang
+    function createPagination(totalRows) {
+        totalPages = Math.ceil(totalRows / itemsPerPage);
+        const paginationContainer = document.getElementById("paginationContainer");
+
+        // Thay vì tạo nút số trang, ta tạo nút "Previous" và "Next"
+        const liPrev = document.createElement("li");
+        const aPrev = document.createElement("a");
+        aPrev.href = "#";
+        aPrev.classList.add("page-link");
+        aPrev.setAttribute("aria-label", "Previous");
+        liPrev.appendChild(aPrev);
+
+        const liNext = document.createElement("li");
+        const aNext = document.createElement("a");
+        aNext.href = "#";
+        aNext.classList.add("page-link");
+        aNext.setAttribute("aria-label", "Next");
+        liNext.appendChild(aNext);
+
+        aPrev.innerHTML = '<span aria-hidden="true">&laquo;</span>';
+        aNext.innerHTML = '<span aria-hidden="true">&raquo;</span>';
+
+        // Sự kiện click cho nút "Previous"
+        aPrev.addEventListener("click", function () {
+            if (currentPage > 1) {
+                currentPage--;
+                displayData(currentPage);
+                updatePagination();
+            }
+        });
+
+        // Sự kiện click cho nút "Next"
+        aNext.addEventListener("click", function () {
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayData(currentPage);
+                updatePagination();
+            }
+        });
+
+        paginationContainer.appendChild(liPrev);
+
+        for (let page = 1; page <= totalPages; page++) {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = "#";
+            a.textContent = page;
+            a.classList.add("page-link");
+
+            // Đặt sự kiện click cho nút phân trang
+            a.addEventListener("click", function () {
+                currentPage = page;
+                displayData(currentPage);
+                updatePagination();
+            });
+
+            li.appendChild(a);
+            paginationContainer.appendChild(li);
+        }
+
+        paginationContainer.appendChild(liNext);
+
+        // Hiển thị trang đầu tiên ban đầu
+        displayData(1);
+        updatePagination();
+    }
+
+    // Hàm để hiển thị dữ liệu cho mỗi trang
+    function displayData(page) {
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        // Lặp qua các dòng và ẩn/hiện dựa trên trang
+        rows.forEach((row, index) => {
+            if (index >= startIndex && index < endIndex) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
+    // Hàm cập nhật trạng thái của các nút phân trang
+    function updatePagination() {
+        const paginationLinks = document.querySelectorAll("#paginationContainer .page-link");
+        paginationLinks.forEach((link, index) => {
+            if (index + 1 === currentPage) {
+                link.classList.add("active-page");
+            } else {
+                link.classList.remove("active-page");
+            }
+        });
+
+        // Ẩn/hiện nút "Previous" và "Next" nếu cần
+        if (currentPage === 1) {
+            liPrev.style.display = "none";
+        } else {
+            liPrev.style.display = "list-item";
+        }
+
+        if (currentPage === totalPages) {
+            liNext.style.display = "none";
+        } else {
+            liNext.style.display = "list-item";
+        }
+    }
+
+    // Thêm phần sau để sáng màu trang hiện tại
+    updatePagination();
+</script>
+
+
+
+
+
 <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
 <script src="../../assets/vendor/libs/popper/popper.js"></script>
 <script src="../../assets/vendor/js/bootstrap.js"></script>
