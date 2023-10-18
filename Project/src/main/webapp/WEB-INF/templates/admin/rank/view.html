@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<table border="10" >
+  <thead>
+  <tr>
+
+    <th>Tên </th>
+    <th>Số điểm tối thiểu</th>
+    <th>Trạng Thái</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="r,index: ${listRank}">
+    <td th:text="${r.rankName}"></td>
+    <td th:text="${r.minimumPoints}"></td>
+    <td th:text="${r.status}"></td>
+
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
