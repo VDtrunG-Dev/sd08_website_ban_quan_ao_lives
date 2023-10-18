@@ -9,7 +9,5 @@ import java.util.List;
 @Repository
 public interface VoucherRepository  extends JpaRepository<TVoucher, Long> {
 
-    TVoucher getTVoucherById(Long id);
 
-    List<TVoucher> getAll();
 }
