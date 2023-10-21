@@ -12,7 +12,11 @@ public interface VoucherService {
 
     List<TVoucher> getExcel();
 
-    void add(TVoucher voucher);
+    TVoucher getById(Long id);
+
+    void save(TVoucher voucher);
+
+    void update(Long id, TVoucher voucher);
 
     void deleteById(Long id);
 

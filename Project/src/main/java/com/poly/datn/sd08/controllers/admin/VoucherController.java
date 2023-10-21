@@ -43,8 +43,34 @@ public class VoucherController {
         return "redirect:/admin/voucher/view";
 
     }
+    
 
+    @GetMapping("create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("voucher", new TVoucher());
+        return "admin/voucher/create";
+    }
 
+    @PostMapping("create")
+    public String create(TVoucher voucher, HttpSession session) {
+        voucherService.save(voucher);
+        session.setAttribute("successMessage", "Tạo mới thành công !");
+        return "redirect:/admin/voucher/view";
+    }
+
+    @GetMapping("update/{id}")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        TVoucher voucher = voucherService.getById(id);
+        model.addAttribute("voucher", voucher);
+        return "admin/voucher/update";
+    }
+
+    @PostMapping("update/{id}")
+    public String update(@PathVariable Long id, TVoucher voucher, HttpSession session) {
+        voucherService.update(id, voucher);
+        session.setAttribute("successMessage", "Cập nhật thành công !");
+        return "redirect:/admin/voucher/view";
+    }
 
 
 

@@ -28,9 +28,23 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
-    public void add(TVoucher voucher) {
+    public TVoucher getById(Long id) {
+        return voucherRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(TVoucher voucher) {
         voucherRepository.save(voucher);
     }
+
+    @Override
+    public void update(Long id, TVoucher voucher) {
+        if (voucherRepository.existsById(id)) {
+            voucher.setId(id);
+            voucherRepository.save(voucher);
+        }
+    }
+
 
     @Override
     public void deleteById(Long id) {
