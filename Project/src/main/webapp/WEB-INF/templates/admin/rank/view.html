@@ -1,27 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{/admin/index :: dynamic(~{::main})}"
+>
 <body>
-<table border="10" >
-  <thead>
-  <tr>
+<main>
 
-    <th>Tên </th>
-    <th>Số điểm tối thiểu</th>
-    <th>Trạng Thái</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="r,index: ${listRank}">
-    <td th:text="${r.rankName}"></td>
-    <td th:text="${r.minimumPoints}"></td>
-    <td th:text="${r.status}"></td>
+    <div class="card">
+        <div>
+            <h5 style="display: inline-block" class="card-header">RANK</h5>
 
-  </tr>
-  </tbody>
-</table>
+            <a href="/admin/rank/create">
+                <button  style="display: inline-block; margin-left: 900px " id="addNewRecordBtn" class="btn btn-primary">Add New Rank</button>
+            </a>
+        </div>
+
+
+        
+        <div class="table-responsive text-nowrap">
+            <div style="margin-left: 20px">
+                <label style="display: inline-block; width: 60px;">Search: </label>
+                <input type="search" style="display: inline-block; width: 250px;" id="searchInput"
+                       class="form-control mb-2" placeholder="Search...">
+            </div>
+            <form th:action="@{/admin/rank/export}" method="post">
+                <button type="submit" class="btn btn-primary">Xuất Excel</button>
+            </form>
+            <table class="table">
+                <thead>
+                <tr>
+
+                    <th>Tên</th>
+                    <th>Số điểm tối thiểu</th>
+                    <th>Trạng Thái</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="r,index: ${listRank}">
+                    <td th:text="${r.rankName}"></td>
+                    <td th:text="${r.minimumPoints}"></td>
+                    <td th:text="${r.status}"></td>
+                    <td>
+                        <a th:href="@{'/admin/rank/update/' + ${r.id}}">
+                            <button class="btn btn-danger">Update</button>
+                        </a>
+                        <a th:href="@{delete/{id}(id=${r.id})}" class="btn btn-success"><i
+
+                                onclick="return confirm('Bạn có muốn xoá không?')" type="submit"></i>Delete</a>
+                    </td>
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
 </body>
 </html>
+

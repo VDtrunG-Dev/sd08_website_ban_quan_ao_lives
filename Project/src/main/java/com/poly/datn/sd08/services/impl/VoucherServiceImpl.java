@@ -44,8 +44,4 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
 
-    @Override
-    public TVoucher detail(Long id) {
-        return voucherRepository.findById(id).orElse(null);
-    }
 }

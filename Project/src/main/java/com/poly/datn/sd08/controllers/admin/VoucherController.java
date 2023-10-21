@@ -37,7 +37,7 @@ public class VoucherController {
 
 
     @GetMapping("delete/{id}")
-    public String delete(@PathVariable Long id, Model model, HttpSession session) {
+    public String delete(@PathVariable Long id, HttpSession session) {
         voucherService.deleteById(id);
         session.setAttribute("successMessage", "Xóa thành công !");
         return "redirect:/admin/voucher/view";

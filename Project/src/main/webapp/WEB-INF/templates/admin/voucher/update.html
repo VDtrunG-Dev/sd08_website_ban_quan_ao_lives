@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Rank</title>
+    <link rel="stylesheet" href="path-to-your-stylesheet.css">
+</head>
+<body>
+
+<form action="" th:action="@{/admin/rank/update/{id}(id=${rank.id})}" th:object="${rank}" method="post">
+
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{rankName}" />
+
+
+    <label for="minimumPoints">Số điểm tối thiểu:</label>
+    <input type="number" id="minimumPoints" th:field="*{minimumPoints}" />
+
+
+    <label for="status">Trạng Thái:</label>
+    <select id="status" th:field="*{status}">
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+
+    </select>
+
+
+    <input type="submit" value="Update" />
+
+</form>
+
+</body>
+</html>

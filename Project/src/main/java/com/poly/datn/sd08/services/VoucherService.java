@@ -18,7 +18,4 @@ public interface VoucherService {
 
     Page<TVoucher> phanTrang(Integer page, Integer size);
 
-
-
-    TVoucher detail(Long id);
 }

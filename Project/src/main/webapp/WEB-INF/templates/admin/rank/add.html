@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{/admin/index :: dynamic(~{::main})}"
+>
+<body>
+<main>
+    <form th:action="@{/admin/rank/create}" th:object="${rank}" method="post">
+
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{rankName}" />
+        <br/>
+
+
+        <label for="minimumPoints">Số điểm tối thiểu:</label>
+        <input type="number" id="minimumPoints" th:field="*{minimumPoints}" />
+        <br/>
+
+
+        <label for="status">Trạng Thái:</label>
+        <select id="status" th:field="*{status}">
+            <option value="0">0</option>
+            <option value="1">1</option>
+
+        </select>
+        <br/>
+
+
+        <input type="submit" value="Submit" />
+
+    </form>
+
+</main>
+</body>
+</html>

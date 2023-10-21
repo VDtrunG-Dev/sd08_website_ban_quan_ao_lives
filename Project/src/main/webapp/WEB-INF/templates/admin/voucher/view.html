@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html
         xmlns:th="http://www.thymeleaf.org"
@@ -25,46 +22,47 @@
                 <input type="search" style="display: inline-block; width: 250px;" id="searchInput"
                        class="form-control mb-2" placeholder="Search...">
             </div>
-    <form th:action="@{/admin/voucher/export}" method="post">
-        <button type="submit" class="btn btn-primary">Xuất Excel</button>
-    </form>
-    <table class="table" >
-        <thead>
-        <tr>
-            <th>Mã  Voucher</th>
-            <th>Số Lượng</th>
-            <th>Hình thức giảm</th>
-            <th>Mức giảm tối đa </th>
-            <th>Đơn hàng tối thiểu</th>
-            <th>Người tạo</th>
-            <th>Trạng thái</th>
-            <th>Hành động</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="v,index: ${list}">
-            <td th:text="${v.voucherCode}"></td>
-            <td th:text="${v.quantity}"></td>
-            <td th:text="${v.reducedForm}"></td>
-            <td th:text="${v.maximumCostReduction}"></td>
-            <td th:text="${v.minimumOrder}"></td>
-            <td th:text="${v.createdBy}"></td>
-            
-
-            <td class="align-middle"
-                th:text="${ ( v.status==1 ? 'Còn Áp Dụng' : 'Không Áp Dụng')}"></td>
-            <td class="align-middle">
-            <td>
-                <a th:href="@{delete/{id}(id=${v.id})}" class="btn btn-success"><i
-
-                        onclick="return confirm('Bạn có muốn xoá không?')" type="submit" ></i>Delete</a>
-            </td>
+            <form th:action="@{/admin/voucher/export}" method="post">
+                <button type="submit" class="btn btn-primary">Xuất Excel</button>
+            </form>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Mã Voucher</th>
+                    <th>Số Lượng</th>
+                    <th>Hình thức giảm</th>
+                    <th>Mức giảm tối đa</th>
+                    <th>Đơn hàng tối thiểu</th>
+                    <th>Người tạo</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="v,index: ${list}">
+                    <td th:text="${v.voucherCode}"></td>
+                    <td th:text="${v.quantity}"></td>
+                    <td th:text="${v.reducedForm}"></td>
+                    <td th:text="${v.maximumCostReduction}"></td>
+                    <td th:text="${v.minimumOrder}"></td>
+                    <td th:text="${v.createdBy}"></td>
 
 
-        </tr>
-        </tbody>
-    </table>
+                    <td class="align-middle"
+                        th:text="${ ( v.status==1 ? 'Còn Áp Dụng' : 'Không Áp Dụng')}"></td>
+                    <td class="align-middle">
+                    <td>
+                        <a th:href="@{delete/{id}(id=${v.id})}" class="btn btn-success"><i
 
+                                onclick="return confirm('Bạn có muốn xoá không?')" type="submit"></i>Delete</a>
+                    </td>
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </main>
 </body>
