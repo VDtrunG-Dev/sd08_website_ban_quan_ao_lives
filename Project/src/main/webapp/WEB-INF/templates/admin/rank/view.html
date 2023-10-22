@@ -1,27 +1,132 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{/admin/index :: dynamic(~{::main})}"
+>
 <body>
-<table border="10" >
-  <thead>
-  <tr>
+<main>
 
-    <th>Tên </th>
-    <th>Số điểm tối thiểu</th>
-    <th>Trạng Thái</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="r,index: ${listRank}">
-    <td th:text="${r.rankName}"></td>
-    <td th:text="${r.minimumPoints}"></td>
-    <td th:text="${r.status}"></td>
+  <div class="card">
+    <div>
+      <h5 style="display: inline-block" class="card-header">RANK</h5>
 
-  </tr>
-  </tbody>
-</table>
+      <a href="/admin/rank/add">
+        <button  style="display: inline-block; margin-left: 900px " id="addNewRecordBtn" class="btn btn-primary">Add New Rank</button>
+      </a>
+    </div>
+
+
+
+    <div class="table-responsive text-nowrap">
+      <div style="margin-left: 20px">
+        <label style="display: inline-block; width: 60px;">Search: </label>
+        <input type="search" style="display: inline-block; width: 250px;" id="searchInput"
+               class="form-control mb-2" placeholder="Search...">
+      </div>
+      <form th:action="@{/admin/rank/export}" method="post">
+        <button type="submit" class="btn btn-primary">Xuất Excel</button>
+      </form>
+      <table class="table">
+        <thead>
+        <tr>
+
+          <th>Tên</th>
+          <th>Số điểm tối thiểu</th>
+          <th>Trạng Thái</th>
+          <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r,index: ${listRank}">
+          <td th:text="${r.rankName}"></td>
+          <td th:text="${r.minimumPoints}"></td>
+          <td th:text="${r.status}"></td>
+          <td>
+            <a th:href="@{'/admin/rank/update/' + ${r.id}}">
+              <button class="btn btn-danger">Update</button>
+            </a>
+            <a th:href="@{delete/{id}(id=${r.id})}" class="btn btn-success"><i
+
+                    onclick="return confirm('Bạn có muốn xoá không?')" type="submit"></i>Delete</a>
+          </td>
+
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <nav style="margin-right: 30px" aria-label="Page navigation" class="mt-3">
+      <ul class="pagination justify-content-end" id="paginationContainer">
+        <li class="page-item">
+
+        </li>
+        <li class="page-item">
+
+        </li>
+      </ul>
+    </nav>
+  </div>
+<!--  &lt;!&ndash; Bootstrap Table with Header - Footer &ndash;&gt;-->
+<!--  <div class="offcanvas offcanvas-end" id="addNewRecordPanel">-->
+<!--    <div class="offcanvas-header border-bottom">-->
+<!--      <h5 class="offcanvas-title">New Record</h5>-->
+<!--      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>-->
+<!--    </div>-->
+<!--    <div class="offcanvas-body">-->
+<!--      <form action="/admin/rank/add" method="post">-->
+<!--        <div class="mb-3">-->
+<!--          <label for="categoryCode" class="form-label">name</label>-->
+<!--          <input type="text" class="form-control" id="categoryCode" name="name">-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--          <label for="categoryName" class="form-label">Create by</label>-->
+<!--          <input type="text" class="form-control" id="categoryName" name="createdBy">-->
+<!--        </div>-->
+
+
+<!--&lt;!&ndash;        <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;          <label class="d-block form-label">Status</label>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="form-check mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <input&ndash;&gt;-->
+<!--&lt;!&ndash;                    type="radio"&ndash;&gt;-->
+<!--&lt;!&ndash;                    id="basic-default-radio-male"&ndash;&gt;-->
+<!--&lt;!&ndash;                    name="status"&ndash;&gt;-->
+<!--&lt;!&ndash;                    class="form-check-input"&ndash;&gt;-->
+<!--&lt;!&ndash;                    value="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                    required&ndash;&gt;-->
+<!--&lt;!&ndash;            />&ndash;&gt;-->
+<!--&lt;!&ndash;            <label&ndash;&gt;-->
+<!--&lt;!&ndash;                    class="form-check-label"&ndash;&gt;-->
+<!--&lt;!&ndash;                    for="basic-default-radio-male"&ndash;&gt;-->
+<!--&lt;!&ndash;            >active</label&ndash;&gt;-->
+<!--&lt;!&ndash;            >&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="form-check">&ndash;&gt;-->
+<!--&lt;!&ndash;            <input&ndash;&gt;-->
+<!--&lt;!&ndash;                    type="radio"&ndash;&gt;-->
+<!--&lt;!&ndash;                    id="basic-default-radio-female"&ndash;&gt;-->
+<!--&lt;!&ndash;                    name="status"&ndash;&gt;-->
+<!--&lt;!&ndash;                    class="form-check-input"&ndash;&gt;-->
+<!--&lt;!&ndash;                    value="0"&ndash;&gt;-->
+<!--&lt;!&ndash;                    required&ndash;&gt;-->
+<!--&lt;!&ndash;            />&ndash;&gt;-->
+<!--&lt;!&ndash;            <label&ndash;&gt;-->
+<!--&lt;!&ndash;                    class="form-check-label"&ndash;&gt;-->
+<!--&lt;!&ndash;                    for="basic-default-radio-female"&ndash;&gt;-->
+<!--&lt;!&ndash;            >inactive</label&ndash;&gt;-->
+<!--&lt;!&ndash;            >&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <button type="submit" class="btn btn-primary">Add Record</button>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+    </div>
+  </div>
+
+  </div>
+
+</main>
 </body>
 </html>
+

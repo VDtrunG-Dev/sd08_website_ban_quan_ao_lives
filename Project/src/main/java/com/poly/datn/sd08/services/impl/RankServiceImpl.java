@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RankServiceImpl  implements RankService {
+public class RankServiceImpl implements RankService {
 
     @Autowired
     private RankRepository rankRepository;
@@ -22,5 +22,28 @@ public class RankServiceImpl  implements RankService {
     @Override
     public List<TRank> getExcel() {
         return rankRepository.findAll();
+    }
+
+    @Override
+    public TRank getById(Long id) {
+        return rankRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(TRank rank) {
+        rankRepository.save(rank);
+    }
+
+    @Override
+    public void update(Long id, TRank rank) {
+        if (rankRepository.existsById(id)) {
+            rank.setId(id);
+            rankRepository.save(rank);
+        }
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        rankRepository.deleteById(id);
     }
 }

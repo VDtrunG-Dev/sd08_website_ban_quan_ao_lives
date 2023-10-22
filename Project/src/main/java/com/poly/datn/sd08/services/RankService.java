@@ -9,4 +9,15 @@ public interface RankService {
     List<TRank> getAll();
 
     List<TRank> getExcel();
+
+
+    TRank getById(Long id);
+
+
+    void save(TRank rank);
+
+    void update(Long id, TRank rank);
+
+    void deleteById(Long id);
+
 }

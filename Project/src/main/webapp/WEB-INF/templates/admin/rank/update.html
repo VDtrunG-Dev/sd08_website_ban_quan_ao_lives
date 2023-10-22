@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{/admin/index :: dynamic(~{::main})}"
+>
+<body>
+<main>
+    <div class="col-md">
+        <div class="card">
+            <h5 class="card-header">Rank update</h5>
+            <div class="card-body">
+                <form class="needs-validation" action="/admin/rank/update" method="post" novalidate>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label class="form-label"
+                            >Id</label
+                            >
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    name="id"
+                                    th:value="${r.id}"
+                                    readonly
+                            />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label class="form-label"
+                            >Name</label
+                            >
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    name="rankName"
+                                    placeholder="Vui Long nhap ten"
+                                    th:value="${r.rankName}"
+
+                                    required
+                            />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label class="form-label"
+                            >Số Điểm Tối Thiểu</label
+                            >
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    name="minimumPoints"
+                                    placeholder="Vui long nhap diem"
+                                    th:value="${r.minimumPoints}"
+
+                                    required
+                            />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label class="form-label"
+                            >Trạng Thái</label
+                            >
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    name="status"
+                                    placeholder="trang thai"
+                                    th:value="${r.status}"
+                                    required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

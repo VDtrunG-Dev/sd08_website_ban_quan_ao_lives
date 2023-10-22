@@ -28,24 +28,28 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
-    public void add(TVoucher voucher) {
+    public TVoucher getById(Long id) {
+        return voucherRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(TVoucher voucher) {
         voucherRepository.save(voucher);
     }
+
+    @Override
+    public void update(Long id, TVoucher voucher) {
+        if (voucherRepository.existsById(id)) {
+            voucher.setId(id);
+            voucherRepository.save(voucher);
+        }
+    }
+
 
     @Override
     public void deleteById(Long id) {
         voucherRepository.deleteById(id);
     }
 
-    @Override
-    public Page<TVoucher> phanTrang(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return voucherRepository.findAll(pageable);
-    }
 
-
-    @Override
-    public TVoucher detail(Long id) {
-        return voucherRepository.findById(id).orElse(null);
-    }
 }
