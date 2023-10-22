@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{/admin/index :: dynamic(~{::main})}"
+>
+<body>
+<main>
+    <div class="col-md">
+        <div class="card">
+            <h5 class="card-header">Option update</h5>
+            <div class="card-body">
+                <form class="needs-validation" action="/option/update" method="post" novalidate>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label class="form-label"
+                            >Id</label
+                            >
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    name="id"
+                                    th:value="${option.id}"
+                                    readonly
+                            />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label class="form-label"
+                            >Name</label
+                            >
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    name="name"
+                                    placeholder="enter name"
+                                    th:value="${option.name}"
+
+                                    required
+                            />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label class="form-label"
+                            >Create by</label
+                            >
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    name="createdBy"
+                                    placeholder="create by"
+                                    th:value="${option.createdBy}"
+
+                                    required
+                            />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label class="form-label"
+                            >Update by</label
+                            >
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    name="updatedBy"
+                                    placeholder="update by"
+                                    th:value="${option.updatedBy}"
+                                    required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="d-block form-label">Status</label>
+                        <div class="form-check mb-2">
+                            <input
+                                    type="radio"
+                                    id="basic-default-radio-male"
+                                    name="status"
+                                    class="form-check-input"
+                                    value="1"
+                                    th:checked="${option.status == 1}"
+                                    required
+                            />
+                            <label
+                                    class="form-check-label"
+                                    for="basic-default-radio-male"
+                            >active</label
+                            >
+                        </div>
+                        <div class="form-check">
+                            <input
+                                    type="radio"
+                                    id="basic-default-radio-female"
+                                    name="status"
+                                    class="form-check-input"
+                                    th:checked="${option.status == 0}"
+                                    value="0"
+                                    required
+                            />
+                            <label
+                                    class="form-check-label"
+                                    for="basic-default-radio-female"
+                            >inactive</label
+                            >
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
