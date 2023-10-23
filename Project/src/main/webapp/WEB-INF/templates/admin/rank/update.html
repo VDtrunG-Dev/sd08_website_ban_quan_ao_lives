@@ -10,20 +10,7 @@
             <h5 class="card-header">Rank update</h5>
             <div class="card-body">
                 <form class="needs-validation" action="/admin/rank/update" method="post" novalidate>
-                    <div class="mb-3">
-                        <div class="mb-3">
-                            <label class="form-label"
-                            >Id</label
-                            >
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    name="id"
-                                    th:value="${r.id}"
-                                    readonly
-                            />
-                        </div>
-                    </div>
+
 
                     <div class="mb-3">
                         <div class="mb-3">
@@ -34,44 +21,49 @@
                                     type="text"
                                     class="form-control"
                                     name="rankName"
-                                    placeholder="Vui Long nhap ten"
+                                    placeholder="enter name"
                                     th:value="${r.rankName}"
+                                    required
+                            />
+                        </div>
+                    </div>
 
-                                    required
-                            />
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="mb-3">
-                            <label class="form-label"
-                            >Số Điểm Tối Thiểu</label
-                            >
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    name="minimumPoints"
-                                    placeholder="Vui long nhap diem"
-                                    th:value="${r.minimumPoints}"
 
-                                    required
-                            />
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="mb-3">
-                            <label class="form-label"
-                            >Trạng Thái</label
-                            >
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    name="status"
-                                    placeholder="trang thai"
-                                    th:value="${r.status}"
-                                    required
-                            />
-                        </div>
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label class="d-block form-label">Status</label>-->
+<!--                        <div class="form-check mb-2">-->
+<!--                            <input-->
+<!--                                    type="radio"-->
+<!--                                    id="basic-default-radio-male"-->
+<!--                                    name="status"-->
+<!--                                    class="form-check-input"-->
+<!--                                    value="1"-->
+<!--                                    th:checked="${r.status == 1}"-->
+<!--                                    required-->
+<!--                            />-->
+<!--                            <label-->
+<!--                                    class="form-check-label"-->
+<!--                                    for="basic-default-radio-male"-->
+<!--                            >active</label-->
+<!--                            >-->
+<!--                        </div>-->
+<!--                        <div class="form-check">-->
+<!--                            <input-->
+<!--                                    type="radio"-->
+<!--                                    id="basic-default-radio-female"-->
+<!--                                    name="status"-->
+<!--                                    class="form-check-input"-->
+<!--                                    th:checked="${r.status == 0}"-->
+<!--                                    value="0"-->
+<!--                                    required-->
+<!--                            />-->
+<!--                            <label-->
+<!--                                    class="form-check-label"-->
+<!--                                    for="basic-default-radio-female"-->
+<!--                            >inactive</label-->
+<!--                            >-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <div class="row">
                         <div class="col-12">

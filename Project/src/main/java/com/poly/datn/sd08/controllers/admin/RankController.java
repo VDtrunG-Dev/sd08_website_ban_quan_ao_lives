@@ -42,8 +42,6 @@ public class RankController {
 
     }
 
-
-
     @PostMapping("add")
     public String add(TRank rank) {
         rankService.save(rank);
