@@ -9,7 +9,7 @@
 
     <div class="card">
         <div>
-            <h5 style="display: inline-block" class="card-header">Category</h5>
+            <h5 style="display: inline-block" class="card-header">Voucher</h5>
             <button style="display: inline-block; margin-left: 900px " id="addNewRecordBtn" class="btn btn-primary">Add
                 New Record
             </button>
@@ -25,17 +25,17 @@
             <form th:action="@{/admin/voucher/export}" method="post">
                 <button type="submit" class="btn btn-primary">Xuất Excel</button>
             </form>
-            <table class="table">
+            <table class="table" id="phanTrang">
                 <thead>
                 <tr>
-                    <th>Mã Voucher</th>
-                    <th>Số Lượng</th>
+                    <th>Code</th>
+                    <th>Quantity</th>
                     <th>Hình thức giảm</th>
                     <th>Mức giảm tối đa</th>
-                    <th>Đơn hàng tối thiểu</th>
-                    <th>Người tạo</th>
-                    <th>Trạng thái</th>
-                    <th>Hành động</th>
+                    <th>MinimumOrder</th>
+                    <th>Create By</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,22 +46,32 @@
                     <td th:text="${v.maximumCostReduction}"></td>
                     <td th:text="${v.minimumOrder}"></td>
                     <td th:text="${v.createdBy}"></td>
+                    <td>
+                        <span th:if="${v.status == 1}" class="badge bg-label-success me-1">Còn Áp Dụng</span>
+                        <span th:if="${v.status == 0}" class="badge bg-label-success me-1">Không Áp Dụng</span>
+                    </td>
 
-
-                    <td class="align-middle"
-                        th:text="${ ( v.status==1 ? 'Còn Áp Dụng' : 'Không Áp Dụng')}"></td>
-                    <td class="align-middle">
                     <td>
                         <a th:href="@{delete/{id}(id=${v.id})}" class="btn btn-success"><i
 
                                 onclick="return confirm('Bạn có muốn xoá không?')" type="submit"></i>Delete</a>
                     </td>
 
-
                 </tr>
                 </tbody>
             </table>
+
         </div>
+        <nav style="margin-right: 30px" aria-label="Page navigation" class="mt-3">
+            <ul class="pagination justify-content-end" id="paginationContainer">
+                <li class="page-item">
+
+                </li>
+                <li class="page-item">
+
+                </li>
+            </ul>
+        </nav>
     </div>
 
 </main>
